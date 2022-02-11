@@ -1,17 +1,6 @@
 import React from 'react';
-import Container from '@mui/material/Container';
-import MenuBar from './components/MenuBar';
+import AllRoutes from "./routes";
 
-
-const App = () => {
-  return (
-    <React.Fragment>
-      <MenuBar/>
-      <Container maxWidth="sm">
-        <h1>Hello worldd</h1>
-      </Container>
-    </React.Fragment>
-  )
-}
+const App = () => { return <AllRoutes /> }
 
 export default App;
