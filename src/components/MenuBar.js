@@ -55,22 +55,32 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 const flexStyle = { display: "flex" };
 
-const MenuBar = () => {
+const MenuBar = ({ setOpenSideMenu }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "#3b4cca" }}>
         <Toolbar sx={[flexStyle, { justifyContent: "space-between" }]}>
-            <MenuItem sx={flexStyle} component={Link} to="/">
-              <BadgeSideMenu pathImg={iconLogo} title="logo" width={32} />
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-              >
-                POKEMA1
-              </Typography>
-            </MenuItem>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 2, display: { xs: "block", md: "none" } }}
+            onClick={() => setOpenSideMenu(value => !value)}
+          >
+            <MenuIcon />
+          </IconButton>
+          <MenuItem sx={flexStyle} component={Link} to="/">
+            <BadgeSideMenu pathImg={iconLogo} title="logo" width={32} />
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            >
+              POKEMA1
+            </Typography>
+          </MenuItem>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -88,13 +98,3 @@ const MenuBar = () => {
 
 export default MenuBar;
 
-
-/*<IconButton
-size="large"
-edge="start"
-color="inherit"
-aria-label="open drawer"
-sx={{ mr: 2 }}
->
-<MenuIcon />
-</IconButton>*/
