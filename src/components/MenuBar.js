@@ -1,4 +1,7 @@
 import React from "react";
+import BadgeSideMenu from "../components/Badge";
+import iconLogo from "../assets/icon-pokeball-3.png"
+import { Link } from "react-router-dom"
 
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -24,7 +27,6 @@ const Search = styled('div')(({ theme }) => ({
     width: 'auto',
   },
 }));
-
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
@@ -34,7 +36,6 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'center',
 }));
-
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
@@ -51,20 +52,26 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+const flexStyle = { display: "flex" };
 
 const MenuBar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{backgroundColor:"#3b4cca"}}>
-        <Toolbar>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-          >
-            POKEMA1
-          </Typography>
+      <AppBar position="static" sx={{ backgroundColor: "#3b4cca" }}>
+        <Toolbar sx={[flexStyle, { justifyContent: "space-between" }]}>
+            <Link to="/">
+          <Box sx={flexStyle}>
+              <BadgeSideMenu pathImg={iconLogo} title="logo" width={32} />
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+              >
+                POKEMA1
+              </Typography>
+          </Box>
+            </Link>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
