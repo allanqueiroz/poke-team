@@ -13,18 +13,14 @@ const SideMenu = () => {
     return (
             <Paper sx={{ width: "20%", maxWidth: '100%', backgroundColor: "#3b4cca", mt: 0.2, color: "#fff" }}>
                 <MenuList>
-                    <Link to="/">
-                        <MenuItem >
+                        <MenuItem component={Link} to="/">
                             <BadgeSideMenu pathImg={iconPokeball} title="a pokeball icon" width={17} />
                             <ListItemText>Pokedex</ListItemText>
                         </MenuItem>
-                    </Link>
-                    <Link to="/teams">
-                        <MenuItem>
+                        <MenuItem component={Link} to="/teams">
                             <BadgeSideMenu pathImg={iconTeam} title="a triple pokeball icon" width={17} />
                             <ListItemText>My Teams</ListItemText>
                         </MenuItem>
-                    </Link>
                 </MenuList>
             </Paper>
     )

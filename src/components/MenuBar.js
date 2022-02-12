@@ -11,6 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import SearchIcon from '@mui/icons-material/Search';
 
 const Search = styled('div')(({ theme }) => ({
@@ -59,8 +60,7 @@ const MenuBar = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "#3b4cca" }}>
         <Toolbar sx={[flexStyle, { justifyContent: "space-between" }]}>
-            <Link to="/">
-          <Box sx={flexStyle}>
+            <MenuItem sx={flexStyle} component={Link} to="/">
               <BadgeSideMenu pathImg={iconLogo} title="logo" width={32} />
               <Typography
                 variant="h6"
@@ -70,8 +70,7 @@ const MenuBar = () => {
               >
                 POKEMA1
               </Typography>
-          </Box>
-            </Link>
+            </MenuItem>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
