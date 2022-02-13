@@ -26,9 +26,10 @@ const SideMenu = ({ openSideMenu, setOpenSideMenu }) => {
             mt: 0.2,
             color: "#fff",
             position: {
-                xs: "fixed",
+                xs: "absolute",
                 md: "relative"
-            }
+            },
+            zIndex: 33
 
         }
     }
