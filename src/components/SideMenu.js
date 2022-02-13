@@ -11,7 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Paper from '@mui/material/Paper';
 
 const SideMenu = ({ openSideMenu, setOpenSideMenu }) => {
-    const myStyles = {
+    const myStylesSideMenu = {
         paper: {
             display: {
                 xs: openSideMenu ? "block" : "none",
@@ -34,7 +34,7 @@ const SideMenu = ({ openSideMenu, setOpenSideMenu }) => {
     }
 
     return (
-        <Paper sx={myStyles.paper} >
+        <Paper sx={myStylesSideMenu.paper} >
             <MenuList >
                 <MenuItem component={Link} to="/" onClick={() => setOpenSideMenu(value => !value)} >
                     <BadgeSideMenu pathImg={iconPokeball}
