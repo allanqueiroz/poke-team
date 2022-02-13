@@ -1,8 +1,10 @@
 import React from "react";
 import Pokedex from "./pages/pokedex";
 import MyTeams from "./pages/myTeams";
-import Container from '@mui/material/Container';
+import Berries from "./pages/berries";
 import { Route, Routes } from "react-router-dom"
+
+import Container from '@mui/material/Container';
 
 const AllRoutes = () => {
     return (
@@ -10,6 +12,7 @@ const AllRoutes = () => {
                 <Routes>
                     <Route path="/" element={<Pokedex />} exact />
                     <Route path="/teams" element={<MyTeams />} />
+                    <Route path="/berries" element={<Berries/>} />
                 </Routes>
             </Container>
     )
