@@ -1,0 +1,17 @@
+{
+    "short_name": "Pokema1",
+    "name": "PokemonMyTeam",
+    "icons": [
+      {
+        "src": "./favicon.png",
+        "sizes": "32x32",
+        "type": "image/png"
+      },{
+        "src": "./favicon2.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ],
+    "start_url": ".",
+    "display": "standalone"
+  }
