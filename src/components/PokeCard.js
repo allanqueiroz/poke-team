@@ -1,11 +1,12 @@
 import React from "react";
+import {Link} from "react-router-dom"
 
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+
 
 const PokeCard = ({ pokeAPIData }) => {
     const myStylesPokeCard = {
@@ -29,14 +30,12 @@ const PokeCard = ({ pokeAPIData }) => {
     }
 
     function getIDfromURL(url) { return url.slice(33).replace(/\//g, ""); }
-    function handleClickCard(name) {
-        console.log(`Clicou no CARD: ${name}`)
-    }
+
     return (
         <React.Fragment>
             {
                 pokeAPIData.results.map(pokemon => (
-                    <Card sx={myStylesPokeCard.card} key={pokemon.name} onClick={() => handleClickCard(pokemon.name)}>
+                    <Card sx={myStylesPokeCard.card} key={pokemon.name} component={Link} to={`/detailed/${getIDfromURL(pokemon.url)}`}>
                         <CardActionArea title={pokemon.name}>
                             <CardMedia
                                 component="img"
