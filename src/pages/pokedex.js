@@ -20,9 +20,12 @@ const Pokedex = () => {
 
     const [loadingData, setLoadingData] = React.useState(true);
     const [pokeData, setPokeData] = React.useState({});
+    const [page, setPage] = React.useState(1);
+    const [offSet, setOffSet] = React.useState(0);
+    const [previousPage, SetPreviousPage] = React.useState(0);
 
     React.useEffect(() => {
-        pokeApi.get("/pokemon")
+        pokeApi.get("/pokemon?offset=0")
             .then(({ data }) => {
                 // console.log(data); 
                 setPokeData(data);
@@ -31,24 +34,30 @@ const Pokedex = () => {
             .catch(err => console.log(err));
     }, []);
 
-    const renderItemPagination = (item, page) => {
-        if(page == 1){
-            pokeApi.get("/pokemon?offset=0")
+    React.useEffect(() => {
+        console.log("PAGE_", page)
+        console.log("OFFSET", offSet)
+
+        pokeApi.get(`/pokemon?offset=${offSet}`)
             .then(({ data }) => {
-                // console.log(data); 
                 setPokeData(data);
                 setLoadingData(false);
             })
             .catch(err => console.log(err));
-        }else if(page == 44){
-            pokeApi.get("/pokemon?offset=880")
-            .then(({ data }) => {
-                // console.log(data); 
-                setPokeData(data);
-                setLoadingData(false);
-            })
-            .catch(err => console.log(err));
+    }, [offSet])
+
+    const handleItemPagination = (evento, newPageNumber) => {
+
+        if (page == 1 && offSet != 0) {
+            setOffSet(0);
+            console.log("ainda estou no 1")
+        } else {
+            SetPreviousPage(page);
+            setPage(newPageNumber);
+            const newValueOffSet = (((newPageNumber - (previousPage + 1)) * 20) + offSet);
+            setOffSet(newValueOffSet);
         }
+
     }
 
     return (
@@ -58,7 +67,7 @@ const Pokedex = () => {
                 :
                 <PokeCard pokeAPIData={pokeData} />
             }
-            <Pagination siblingCount={0} boundaryCount={0} count={44} shape="rounded"   showFirstButton={true} showLastButton={true} onChange={renderItemPagination} sx={myStylesPokedex.pagination} />
+            <Pagination page={page} onChange={handleItemPagination} count={45} shape="rounded" sx={myStylesPokedex.pagination} />
         </Container>
     )
 }
