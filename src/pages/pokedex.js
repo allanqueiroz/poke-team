@@ -4,13 +4,17 @@ import pokeApi from "../services/pokeAPI";
 import PokeCard from "../components/PokeCard";
 
 import Container from '@mui/material/Container';
+import Pagination from '@mui/material/Pagination';
 
 const Pokedex = () => {
     const myStylesPokedex = {
-        container:{
+        container: {
             display: "flex",
             flexWrap: "wrap",
-            justifyContent:"center",
+            justifyContent: "center",
+        },
+        pagination: {
+            margin: "10px 0px",
         }
     }
 
@@ -25,15 +29,36 @@ const Pokedex = () => {
                 setLoadingData(false);
             })
             .catch(err => console.log(err));
-    }, [])
+    }, []);
+
+    const renderItemPagination = (item, page) => {
+        if(page == 1){
+            pokeApi.get("/pokemon?offset=0")
+            .then(({ data }) => {
+                // console.log(data); 
+                setPokeData(data);
+                setLoadingData(false);
+            })
+            .catch(err => console.log(err));
+        }else if(page == 44){
+            pokeApi.get("/pokemon?offset=880")
+            .then(({ data }) => {
+                // console.log(data); 
+                setPokeData(data);
+                setLoadingData(false);
+            })
+            .catch(err => console.log(err));
+        }
+    }
 
     return (
         <Container sx={myStylesPokedex.container}>
             {loadingData ?
                 <CircularProgress sx={{ display: "block", m: "0 auto" }} />
                 :
-                <PokeCard pokeAPIData={pokeData}/>
+                <PokeCard pokeAPIData={pokeData} />
             }
+            <Pagination siblingCount={0} boundaryCount={0} count={44} shape="rounded"   showFirstButton={true} showLastButton={true} onChange={renderItemPagination} sx={myStylesPokedex.pagination} />
         </Container>
     )
 }
