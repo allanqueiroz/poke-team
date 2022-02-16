@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
@@ -34,7 +34,7 @@ const PokeCard = ({ pokeAPIData }) => {
     return (
         <React.Fragment>
             {
-                pokeAPIData.results.map(pokemon => (
+                pokeAPIData.results ? pokeAPIData.results.map(pokemon => (
                     <Card sx={myStylesPokeCard.card} key={pokemon.name} component={Link} to={`/detailed/${getIDfromURL(pokemon.url)}`}>
                         <CardActionArea title={pokemon.name}>
                             <CardMedia
@@ -48,8 +48,22 @@ const PokeCard = ({ pokeAPIData }) => {
                                 {pokemon.name}
                             </Typography>
                         </CardActionArea>
+                    </Card>))
+                    :
+                    <Card sx={myStylesPokeCard.card} key={pokeAPIData.name} component={Link} to={`/detailed/${pokeAPIData.id}`}>
+                        <CardActionArea title={pokeAPIData.name}>
+                            <CardMedia
+                                component="img"
+                                alt={`Pokemon card: ${pokeAPIData.name}`}
+                                sx={myStylesPokeCard.cardMedia}
+                                image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeAPIData.id}.png`}
+                            />
+                            <Divider sx={myStylesPokeCard.divider} />
+                            <Typography variant="h6" component="div" align="center">
+                                {pokeAPIData.name}
+                            </Typography>
+                        </CardActionArea>
                     </Card>
-                ))
             }
         </React.Fragment>
     )

@@ -3,6 +3,7 @@ import BadgeSideMenu from "../components/Badge";
 import iconLogo from "../assets/icon-pokeball-3.png";
 import { Link } from "react-router-dom";
 import {useSearch} from "../hooks/searchContext";
+import { usePokeData } from "../hooks/pokeDataContext";
 import pokeApi from "../services/pokeAPI";
 
 import { styled, alpha } from '@mui/material/styles';
@@ -31,15 +32,6 @@ const Search = styled('div')(({ theme }) => ({
     width: 'auto',
   },
 }));
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
@@ -65,12 +57,16 @@ const myStylesMenuBar = {
 
 const MenuBar = ({ setOpenSideMenu }) => {
   const {search, setSearch} = useSearch();
+  const {setPokeData} = usePokeData();
 
   const handleClickSearchButton = () =>{
     if(!search) alert("O campo de pesquisa não pode ser vazio")
     else{
       pokeApi.get(`/pokemon/${search.toLowerCase()}`)
-        .then(res => console.log(res))
+        .then(({data}) => {
+          setPokeData(data);
+          setSearch("");
+        })
         .catch(err => alert("Por favor, verificar nome do pokemon"))
     }
   }
