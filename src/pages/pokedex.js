@@ -2,11 +2,18 @@ import React from "react";
 import CircularProgress from '@mui/material/CircularProgress';
 import pokeApi from "../services/pokeAPI";
 import PokeCard from "../components/PokeCard";
+import { useSearch } from "../hooks/searchContext";
 
 import Container from '@mui/material/Container';
 import Pagination from '@mui/material/Pagination';
 
 const Pokedex = () => {
+    const [loadingData, setLoadingData] = React.useState(true);
+    const [pokeData, setPokeData] = React.useState({});
+    const [page, setPage] = React.useState(1);
+    const [offSet, setOffSet] = React.useState(0);
+    const {search} = useSearch();
+
     const myStylesPokedex = {
         container: {
             display: "flex",
@@ -17,11 +24,6 @@ const Pokedex = () => {
             margin: "10px 0px",
         }
     }
-
-    const [loadingData, setLoadingData] = React.useState(true);
-    const [pokeData, setPokeData] = React.useState({});
-    const [page, setPage] = React.useState(1);
-    const [offSet, setOffSet] = React.useState(0);
 
     React.useEffect(() => {
         pokeApi.get("/pokemon?offset=0")

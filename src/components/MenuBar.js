@@ -1,7 +1,8 @@
 import React from "react";
 import BadgeSideMenu from "../components/Badge";
-import iconLogo from "../assets/icon-pokeball-3.png"
-import { Link } from "react-router-dom"
+import iconLogo from "../assets/icon-pokeball-3.png";
+import { Link } from "react-router-dom";
+import {useSearch} from "../hooks/searchContext";
 
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -13,6 +14,7 @@ import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import SearchIcon from '@mui/icons-material/Search';
+import { Button } from "@mui/material";
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -53,13 +55,23 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-const flexStyle = { display: "flex" };
+
+const myStylesMenuBar = {
+  flexStyle: { display: "flex" },
+  colorButton: {color:"#fff"},
+  appBarColor:{ backgroundColor: "#3b4cca" }
+}
 
 const MenuBar = ({ setOpenSideMenu }) => {
+  const {search, setSearch} = useSearch();
+
+  const handleClickSearchButton = () =>{
+    console.log("Clicou no SearchButton")
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: "#3b4cca" }}>
-        <Toolbar sx={[flexStyle, { justifyContent: "space-between" }]}>
+      <AppBar position="static" sx={myStylesMenuBar.appBarColor}>
+        <Toolbar sx={[myStylesMenuBar.flexStyle, { justifyContent: "space-between" }]}>
           <IconButton
             size="large"
             edge="start"
@@ -70,7 +82,7 @@ const MenuBar = ({ setOpenSideMenu }) => {
           >
             <MenuIcon />
           </IconButton>
-          <MenuItem sx={flexStyle} component={Link} to="/">
+          <MenuItem sx={myStylesMenuBar.flexStyle} component={Link} to="/">
             <BadgeSideMenu pathImg={iconLogo} title="logo" width={32} />
             <Typography
               variant="h6"
@@ -81,15 +93,19 @@ const MenuBar = ({ setOpenSideMenu }) => {
               POKEMA1
             </Typography>
           </MenuItem>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Buscar"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
+          <Box sx={myStylesMenuBar.flexStyle}>
+            <Search title="Digite o nome do pokemon que você deseja buscar. Este campo não pode ser vazio">
+              <StyledInputBase
+                placeholder="Buscar"
+                inputProps={{ 'aria-label': 'search' }}
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+              />
+            </Search>
+            <Button onClick={handleClickSearchButton} variant="outlined" title="Buscar pokemon"> 
+              <SearchIcon sx={myStylesMenuBar.colorButton}/>
+            </Button>
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

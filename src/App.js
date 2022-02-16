@@ -2,6 +2,7 @@ import React from 'react';
 import AllRoutes from "./routes";
 import MenuBar from './components/MenuBar';
 import SideMenu from "./components/SideMenu";
+import { SearchProvider } from './hooks/searchContext';
 
 import { BrowserRouter } from "react-router-dom"
 
@@ -12,11 +13,13 @@ const App = () => {
     return (
         <React.Fragment>
             <BrowserRouter>
-                <MenuBar setOpenSideMenu={setOpenSideMenu} />
-                <Box sx={{ display: "flex", minHeight: "100vh", }}>
-                    <SideMenu openSideMenu={openSideMenu} setOpenSideMenu={setOpenSideMenu} />
-                    <AllRoutes />
-                </Box>
+                <SearchProvider>
+                    <MenuBar setOpenSideMenu={setOpenSideMenu} />
+                    <Box sx={{ display: "flex", minHeight: "100vh", }}>
+                        <SideMenu openSideMenu={openSideMenu} setOpenSideMenu={setOpenSideMenu} />
+                        <AllRoutes />
+                    </Box>
+                </SearchProvider>
             </BrowserRouter>
         </React.Fragment>
 
