@@ -3,6 +3,7 @@ import BadgeSideMenu from "../components/Badge";
 import iconLogo from "../assets/icon-pokeball-3.png";
 import { Link } from "react-router-dom";
 import {useSearch} from "../hooks/searchContext";
+import pokeApi from "../services/pokeAPI";
 
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -66,7 +67,12 @@ const MenuBar = ({ setOpenSideMenu }) => {
   const {search, setSearch} = useSearch();
 
   const handleClickSearchButton = () =>{
-    console.log("Clicou no SearchButton")
+    if(!search) alert("O campo de pesquisa não pode ser vazio")
+    else{
+      pokeApi.get(`/pokemon/${search.toLowerCase()}`)
+        .then(res => console.log(res))
+        .catch(err => alert("Por favor, verificar nome do pokemon"))
+    }
   }
   return (
     <Box sx={{ flexGrow: 1 }}>
