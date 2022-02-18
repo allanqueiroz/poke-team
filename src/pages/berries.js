@@ -1,5 +1,6 @@
 import React from "react";
 import pokeApi from "../services/pokeAPI";
+import BerryTable from "../components/BerryTable";
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,7 +12,6 @@ import { Typography } from "@mui/material";
 
 const Berries = () => {
     const [allBerries, setAllBerries] = React.useState([]);
-    const [berry, setBerry] = React.useState([]);
 
     const myStylesBerries = {
         typog: {
@@ -23,27 +23,13 @@ const Berries = () => {
         headTableCell: {
             fontSize: "1em",
         },
-        bodyTableCell: {
-            '&:hover': {
-                backgroundColor: "#f1f1f1",
-            },
-        }
-
     }
 
     React.useEffect(() => {
-        pokeApi.get(`/berry?limit=10`)
+        pokeApi.get(`/berry?limit=3`)
             .then(({ data }) => setAllBerries(data.results))
             .catch(err => console.log("UmError:", err))
     }, [])
-
-    React.useEffect(() => {
-        allBerries.map(item => {
-            pokeApi.get(`https://pokeapi.co/api/v2/item/${item.name}-berry/`)
-                .then(({ data }) => setBerry(v => [...v, data]))
-                .catch(err => console.log(err))
-        })
-    }, [allBerries])
 
     return (
         <React.Fragment>
@@ -60,25 +46,7 @@ const Berries = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {
-                            berry.map(item => {
-                                return (
-                                    <TableRow key={item.id} sx={myStylesBerries.bodyTableCell}>
-                                        <TableCell>{item.name.replace("-berry","")}</TableCell>
-                                        <TableCell>
-                                            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${item.name}.png`} />
-                                        </TableCell>
-                                        <TableCell>
-                                            {
-                                                item.effect_entries.map(effc => effc.effect)
-                                            }
-                                        </TableCell>
-                                        <TableCell>{item.category.name}</TableCell>
-                                        <TableCell>{item.cost}</TableCell>
-                                    </TableRow>
-                                )
-                            })
-                        }
+                        {allBerries.length ? <BerryTable arrayBerries={allBerries} />: null}
                     </TableBody>
                 </Table>
             </TableContainer>
