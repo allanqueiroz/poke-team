@@ -9,6 +9,7 @@ import ListItemText from '@mui/material/ListItemText';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 
 const SideMenu = ({ openSideMenu, setOpenSideMenu }) => {
     const myStylesSideMenu = {
@@ -31,6 +32,10 @@ const SideMenu = ({ openSideMenu, setOpenSideMenu }) => {
             },
             zIndex: 33
 
+        },
+        topog: {
+            fontWeight: "bold",
+            letterSpacing: 1.3
         }
     }
 
@@ -41,19 +46,30 @@ const SideMenu = ({ openSideMenu, setOpenSideMenu }) => {
                     <BadgeSideMenu pathImg={iconPokeball}
                         title="a pokeball icon"
                         width={17} />
-                    <ListItemText>Pokedex</ListItemText>
+                    <ListItemText>
+                        <Typography sx={myStylesSideMenu.topog}>
+                            Pokedex
+                        </Typography>
+                    </ListItemText>
                 </MenuItem>
                 <MenuItem component={Link} to="/teams" onClick={() => setOpenSideMenu(value => !value)}>
                     <BadgeSideMenu pathImg={iconTeam}
                         title="a triple pokeball icon"
                         width={17} />
-                    <ListItemText>My Teams</ListItemText>
+                    <ListItemText>
+                        <Typography sx={myStylesSideMenu.topog}>
+                            My Teams
+                        </Typography>
+                    </ListItemText>
                 </MenuItem>
                 <MenuItem component={Link} to="/berries" onClick={() => setOpenSideMenu(value => !value)}>
                     <BadgeSideMenu pathImg={iconBerry}
                         title="a berries icon"
                         width={17} />
-                    <ListItemText>Berries</ListItemText>
+                    <ListItemText>
+                        <Typography sx={myStylesSideMenu.topog}>
+                            Berries
+                        </Typography></ListItemText>
                 </MenuItem>
             </MenuList>
         </Paper>
