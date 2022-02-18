@@ -3,16 +3,15 @@ import pokeApi from "../services/pokeAPI";
 import BerryTable from "../components/BerryTable";
 
 import Table from '@mui/material/Table';
+import TableRow from '@mui/material/TableRow';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import TableContainer from '@mui/material/TableContainer';
 import { Typography } from "@mui/material";
 
 const Berries = () => {
     const [allBerries, setAllBerries] = React.useState([]);
-
     const myStylesBerries = {
         typog: {
             m: 3,
@@ -26,8 +25,8 @@ const Berries = () => {
     }
 
     React.useEffect(() => {
-        pokeApi.get(`/berry?limit=3`)
-            .then(({ data }) => setAllBerries(data.results))
+        pokeApi.get(`/berry`)
+            .then(({ data }) => { setAllBerries(data); })
             .catch(err => console.log("UmError:", err))
     }, [])
 
@@ -46,11 +45,10 @@ const Berries = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {allBerries.length ? <BerryTable arrayBerries={allBerries} />: null}
+                        {allBerries.results ? <BerryTable berriesData={allBerries} /> : null}
                     </TableBody>
                 </Table>
             </TableContainer>
-
         </React.Fragment>
     )
 }
