@@ -4,7 +4,7 @@ import pokeApi from "../services/pokeAPI";
 import PokeCard from "../components/PokeCard";
 import { usePokeData } from "../hooks/pokeDataContext";
 
-import { Box, Pagination, Container } from '@mui/material';
+import { Box, Pagination, Container, Typography } from '@mui/material';
 
 const Pokedex = () => {
     const { pokeData, setPokeData } = usePokeData();
@@ -17,6 +17,9 @@ const Pokedex = () => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center"
+        },
+        typog: {
+            m: 3,
         },
         box: {
             display: "flex",
@@ -44,6 +47,7 @@ const Pokedex = () => {
 
     return (
         <Container sx={myStylesPokedex.container}>
+            <Typography variant="h2" sx={myStylesPokedex.typog}>Pokemons</Typography>
             {
                 loadingData ?
                     <CircularProgress sx={{ display: "block", m: "0 auto" }} />

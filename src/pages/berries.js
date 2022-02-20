@@ -26,7 +26,7 @@ const Berries = () => {
 
     return (
         <React.Fragment>
-            <Typography variant="h2" sx={myStylesBerries.typog}>BERRIES FROM POKEMON WORLD </Typography>
+            <Typography variant="h2" sx={myStylesBerries.typog}>Berries from pokemon world</Typography>
             <TableContainer>
                 <Table>
                     <TableHead sx={myStylesBerries.header}>

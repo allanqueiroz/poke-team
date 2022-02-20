@@ -1,11 +1,10 @@
 import React from "react";
-import { Link } from 'react-router-dom';
-import BadgeSideMenu from "../components/Badge";
+import ItemFromMenu from "./ItemMenu";
 import iconPokeball from "../assets/icon-pokeball-2.png";
 import iconTeam from "../assets/icon-team-2.png";
 import iconBerry from "../assets/icon-berry-3.png";
 
-import {Typography, Paper, MenuItem, MenuList, ListItemText} from '@mui/material';
+import {Paper, MenuList} from '@mui/material';
 
 const SideMenu = ({ openSideMenu, setOpenSideMenu }) => {
     const myStylesSideMenu = {
@@ -27,45 +26,15 @@ const SideMenu = ({ openSideMenu, setOpenSideMenu }) => {
                 md: "relative"
             },
             zIndex: 33
-        },
-        topog: {
-            fontWeight: "bold",
-            letterSpacing: 1.3
         }
     }
 
     return (
         <Paper sx={myStylesSideMenu.paper} >
             <MenuList >
-                <MenuItem component={Link} to="/" onClick={() => setOpenSideMenu(value => !value)} >
-                    <BadgeSideMenu pathImg={iconPokeball}
-                        title="a pokeball icon"
-                        width={17} />
-                    <ListItemText>
-                        <Typography sx={myStylesSideMenu.topog}>
-                            Pokedex
-                        </Typography>
-                    </ListItemText>
-                </MenuItem>
-                <MenuItem component={Link} to="/teams" onClick={() => setOpenSideMenu(value => !value)}>
-                    <BadgeSideMenu pathImg={iconTeam}
-                        title="a triple pokeball icon"
-                        width={17} />
-                    <ListItemText>
-                        <Typography sx={myStylesSideMenu.topog}>
-                            My Teams
-                        </Typography>
-                    </ListItemText>
-                </MenuItem>
-                <MenuItem component={Link} to="/berries" onClick={() => setOpenSideMenu(value => !value)}>
-                    <BadgeSideMenu pathImg={iconBerry}
-                        title="a berries icon"
-                        width={17} />
-                    <ListItemText>
-                        <Typography sx={myStylesSideMenu.topog}>
-                            Berries
-                        </Typography></ListItemText>
-                </MenuItem>
+                <ItemFromMenu setOpenSideMenu={setOpenSideMenu} moveTo="/" icon={iconPokeball} title="a pokeball icon" nameItem="Pokedex" />
+                <ItemFromMenu setOpenSideMenu={setOpenSideMenu} moveTo="/teams" icon={iconTeam} title="a triple pokeball icon" nameItem="My Teams" />
+                <ItemFromMenu setOpenSideMenu={setOpenSideMenu} moveTo="/berries" icon={iconBerry} title="a berries icon" nameItem="Berries" />
             </MenuList>
         </Paper>
     )

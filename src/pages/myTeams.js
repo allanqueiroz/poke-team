@@ -1,9 +1,12 @@
 import React from "react";
 
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 const MyTeams = () => {
     const myStyleMyTeam = {
+        typog: {
+            m: 3,
+        },
         button: {
             width: "100%"
         }
@@ -11,7 +14,7 @@ const MyTeams = () => {
 
     return(
         <React.Fragment>
-            <h1>MyTeamsPage</h1>
+            <Typography variant="h2" sx={myStyleMyTeam.typog}>Minhas Equipes</Typography>
             <Button variant="contained" sx={myStyleMyTeam.button}>Adicionar Nova equipe</Button>
         </React.Fragment>
     )
