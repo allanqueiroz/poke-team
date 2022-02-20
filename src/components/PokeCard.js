@@ -1,12 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom"
 
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import Divider from '@mui/material/Divider';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
-
+import { CardActionArea, Card, CardMedia, Divider, Typography } from '@mui/material';
 
 const PokeCard = ({ pokeAPIData }) => {
     const myStylesPokeCard = {
@@ -28,7 +23,6 @@ const PokeCard = ({ pokeAPIData }) => {
             m: 1
         }
     }
-
     function getIDfromURL(url) { return url.slice(33).replace(/\//g, ""); }
 
     return (
@@ -68,5 +62,4 @@ const PokeCard = ({ pokeAPIData }) => {
         </React.Fragment>
     )
 }
-
 export default PokeCard;

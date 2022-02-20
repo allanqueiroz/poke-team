@@ -4,24 +4,21 @@ import pokeApi from "../services/pokeAPI";
 import PokeCard from "../components/PokeCard";
 import { usePokeData } from "../hooks/pokeDataContext";
 
-import Container from '@mui/material/Container';
-import Pagination from '@mui/material/Pagination';
-import Box from '@mui/material/Box';
+import { Box, Pagination, Container } from '@mui/material';
 
 const Pokedex = () => {
     const { pokeData, setPokeData } = usePokeData();
     const [loadingData, setLoadingData] = React.useState(true);
     const [page, setPage] = React.useState(1);
     const [offSet, setOffSet] = React.useState(0);
-
     const myStylesPokedex = {
         container: {
             display: "flex",
-            flexDirection:"column",
+            flexDirection: "column",
             justifyContent: "center",
-            alignItems:"center"
+            alignItems: "center"
         },
-        box:{
+        box: {
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "center",
@@ -47,15 +44,15 @@ const Pokedex = () => {
 
     return (
         <Container sx={myStylesPokedex.container}>
-            {loadingData ?
-                <CircularProgress sx={{ display: "block", m: "0 auto" }} />
-                :<Box sx={myStylesPokedex.box}>
-                    <PokeCard pokeAPIData={pokeData} />
-                </Box>
+            {
+                loadingData ?
+                    <CircularProgress sx={{ display: "block", m: "0 auto" }} />
+                    : <Box sx={myStylesPokedex.box}>
+                        <PokeCard pokeAPIData={pokeData} />
+                    </Box>
             }
             <Pagination page={page} onChange={handleItemPagination} count={45} shape="rounded" sx={myStylesPokedex.pagination} />
         </Container>
     )
 }
-
 export default Pokedex;

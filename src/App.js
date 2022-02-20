@@ -4,7 +4,6 @@ import MenuBar from './components/MenuBar';
 import SideMenu from "./components/SideMenu";
 import { PokeDataProvider } from './hooks/pokeDataContext';
 import { SearchProvider } from './hooks/searchContext';
-
 import { BrowserRouter } from "react-router-dom"
 
 import Box from '@mui/material/Box';
@@ -25,8 +24,6 @@ const App = () => {
                 </PokeDataProvider>
             </BrowserRouter>
         </React.Fragment>
-
     )
 }
-
 export default App;

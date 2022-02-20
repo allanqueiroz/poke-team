@@ -1,22 +1,14 @@
 import React from "react";
-import BadgeSideMenu from "../components/Badge";
-import iconLogo from "../assets/icon-pokeball-3.png";
+import pokeApi from "../services/pokeAPI";
 import { Link } from "react-router-dom";
 import {useSearch} from "../hooks/searchContext";
 import { usePokeData } from "../hooks/pokeDataContext";
-import pokeApi from "../services/pokeAPI";
+import BadgeSideMenu from "../components/Badge";
+import iconLogo from "../assets/icon-pokeball-3.png";
 
-import { styled, alpha } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import SearchIcon from '@mui/icons-material/Search';
-import { Button } from "@mui/material";
+import { Button, styled, alpha, AppBar, Box, Toolbar, IconButton, Typography, MenuItem, InputBase } from "@mui/material";
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -36,7 +28,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -54,7 +45,6 @@ const myStylesMenuBar = {
   colorButton: {color:"#fff"},
   appBarColor:{ backgroundColor: "#3b4cca" }
 }
-
 const MenuBar = ({ setOpenSideMenu }) => {
   const {search, setSearch} = useSearch();
   const {setPokeData} = usePokeData();
@@ -113,6 +103,5 @@ const MenuBar = ({ setOpenSideMenu }) => {
     </Box>
   );
 }
-
 export default MenuBar;
 

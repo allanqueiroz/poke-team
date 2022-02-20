@@ -6,7 +6,6 @@ import { Typography, Box } from "@mui/material";
 const Detailed = () => {
     const [getPokemonByID, setGetPokemonByID] = React.useState([]);
     const { id } = useParams();
-
     const myStyleDetailed = {
         box: {
             display: "flex",

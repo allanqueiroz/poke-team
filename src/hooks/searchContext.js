@@ -1,7 +1,6 @@
 import React from "react";
 
 const SearchContext = React.createContext({});
-
 export function SearchProvider(props) {
     const [search, setSearch] = React.useState("");
     return (
@@ -10,7 +9,6 @@ export function SearchProvider(props) {
         </SearchContext.Provider>
     )
 };
-
 export function useSearch(){
     const { search, setSearch } = React.useContext(SearchContext);
     return { search, setSearch }

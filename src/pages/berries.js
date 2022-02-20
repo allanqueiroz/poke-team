@@ -2,13 +2,7 @@ import React from "react";
 import pokeApi from "../services/pokeAPI";
 import BerryTable from "../components/BerryTable";
 
-import Table from '@mui/material/Table';
-import TableRow from '@mui/material/TableRow';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableContainer from '@mui/material/TableContainer';
-import { Typography } from "@mui/material";
+import { Typography, TableContainer, TableHead, TableCell, TableBody, TableRow, Table} from "@mui/material";
 
 const Berries = () => {
     const [allBerries, setAllBerries] = React.useState([]);

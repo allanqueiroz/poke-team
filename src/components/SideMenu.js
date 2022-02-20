@@ -5,11 +5,7 @@ import iconPokeball from "../assets/icon-pokeball-2.png";
 import iconTeam from "../assets/icon-team-2.png";
 import iconBerry from "../assets/icon-berry-3.png";
 
-import ListItemText from '@mui/material/ListItemText';
-import MenuList from '@mui/material/MenuList';
-import MenuItem from '@mui/material/MenuItem';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
+import {Typography, Paper, MenuItem, MenuList, ListItemText} from '@mui/material';
 
 const SideMenu = ({ openSideMenu, setOpenSideMenu }) => {
     const myStylesSideMenu = {
@@ -31,7 +27,6 @@ const SideMenu = ({ openSideMenu, setOpenSideMenu }) => {
                 md: "relative"
             },
             zIndex: 33
-
         },
         topog: {
             fontWeight: "bold",
@@ -75,5 +70,4 @@ const SideMenu = ({ openSideMenu, setOpenSideMenu }) => {
         </Paper>
     )
 }
-
 export default SideMenu;
