@@ -39,7 +39,7 @@ const PokeCard = ({ pokeAPIData }) => {
                             />
                             <Divider sx={myStylesPokeCard.divider} />
                             <Typography variant="h6" component="div" align="center">
-                                {pokemon.name}
+                            #{getIDfromURL(pokemon.url)} {pokemon.name}
                             </Typography>
                         </CardActionArea>
                     </Card>))

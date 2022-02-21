@@ -7,6 +7,7 @@ import iconBerry from "../assets/icon-berry-3.png";
 import {Paper, MenuList} from '@mui/material';
 
 const SideMenu = ({ openSideMenu, setOpenSideMenu }) => {
+    
     const myStylesSideMenu = {
         paper: {
             display: {

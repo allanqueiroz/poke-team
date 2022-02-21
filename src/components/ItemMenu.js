@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import BadgeSideMenu from "../components/Badge";
 import {Typography, MenuItem, ListItemText} from '@mui/material';
 
-const ItemFromMenu = ({moveTo, icon, title, nameItem, setOpenSideMenu}) => {
+const ItemFromMenu = ({moveTo, icon, title, nameItem, setOpenSideMenu, indexItem}) => {
     const myStylesSideMenu = {
         topog: {
             fontWeight: "bold",
