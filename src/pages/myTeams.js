@@ -1,7 +1,7 @@
 import React from "react";
 import { useMyTeam } from "../hooks/myTeamContext";
 
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -23,7 +23,8 @@ function PaperComponent(props) {
 }
 
 const MyTeams = () => {
-    const { allTeams, setAllTeams, newTeam, setNewTeam } = useMyTeam();
+    const { allTeams, setAllTeams} = useMyTeam();
+    const [nameTeam, setNameTeam] = React.useState("");
     const [open, setOpen] = React.useState(false);
     const myStyleMyTeam = {
         typog: {
@@ -31,15 +32,30 @@ const MyTeams = () => {
         },
         button: {
             width: "100%"
+        },
+        dialog: {
+            display: "block",
+            width: "100%"
+        },
+        yellowColor: {
+            backgroundColor: "#ffde00a1",
+            color: "#000",
+            "&:hover":{
+                backgroundColor: "#ffde00",
+            }
         }
     }
     const handleClickOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
+    const handleClickCreateTeam = () =>{
+        console.log("Criou a equipe")
+        setOpen(false);
+    }
 
     return (
         <React.Fragment>
             <Typography variant="h2" sx={myStyleMyTeam.typog}>Minhas Equipes</Typography>
-            <Button onClick={handleClickOpen} variant="contained" sx={myStyleMyTeam.button}>Adicionar Nova equipe</Button>
+            <Button onClick={handleClickOpen} variant="contained" sx={[myStyleMyTeam.button, myStyleMyTeam.yellowColor]}>Adicionar Nova equipe</Button>
             {
                 allTeams ?
                     <Typography variant="h4">Olá equipe</Typography> :
@@ -49,24 +65,25 @@ const MyTeams = () => {
             }
             <div>
                 <Dialog
+                    fullWidth={true}
+                    maxWidth="md"
                     open={open}
                     onClose={handleClose}
                     PaperComponent={PaperComponent}
+                    sx={myStyleMyTeam.dialog}
                     aria-labelledby="draggable-dialog-title"
                 >
                     <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-                        Criar nova equippe
+                        Criar nova equipe
                     </DialogTitle>
                     <DialogContent>
-                        <DialogContentText>
-                            input-name-equipe aqui
-                        </DialogContentText>
+                        <TextField id="standard-basic" fullWidth label="Nome da equipe" variant="standard" value={nameTeam} onChange={(e)=>setNameTeam(e.target.value)} />
                     </DialogContent>
                     <DialogActions>
                         <Button autoFocus onClick={handleClose}>
                             Cancelar
                         </Button>
-                        <Button onClick={handleClose}>Criar</Button>
+                        <Button onClick={handleClickCreateTeam}>Criar</Button>
                     </DialogActions>
                 </Dialog>
             </div>
