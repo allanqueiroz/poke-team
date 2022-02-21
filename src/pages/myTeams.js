@@ -23,7 +23,8 @@ function PaperComponent(props) {
 }
 
 const MyTeams = () => {
-    const { allTeams, setAllTeams} = useMyTeam();
+    const MY_TEAM = "myteams";
+    const { allTeams, setAllTeams } = useMyTeam();
     const [nameTeam, setNameTeam] = React.useState("");
     const [open, setOpen] = React.useState(false);
     const myStyleMyTeam = {
@@ -40,24 +41,34 @@ const MyTeams = () => {
         yellowColor: {
             backgroundColor: "#ffde00a1",
             color: "#000",
-            "&:hover":{
+            "&:hover": {
                 backgroundColor: "#ffde00",
             }
         }
     }
     const handleClickOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
-    const handleClickCreateTeam = () =>{
-        console.log("Criou a equipe")
-        setOpen(false);
+    const handleClickCreateTeam = () => {
+        if (!nameTeam) alert("Nome da equipe não pode ser vazio")
+        else {
+            const dataTeam = {
+                name: nameTeam,
+                teams: []
+            }
+            localStorage.setItem(MY_TEAM, JSON.stringify([...allTeams, dataTeam]))
+            setOpen(false);
+        }
+
     }
 
     return (
         <React.Fragment>
             <Typography variant="h2" sx={myStyleMyTeam.typog}>Minhas Equipes</Typography>
-            <Button onClick={handleClickOpen} variant="contained" sx={[myStyleMyTeam.button, myStyleMyTeam.yellowColor]}>Adicionar Nova equipe</Button>
+            <Button onClick={handleClickOpen} variant="contained" sx={[myStyleMyTeam.button, myStyleMyTeam.yellowColor]}>A
+                dicionar Nova equipe
+            </Button>
             {
-                allTeams ?
+                allTeams.length ?
                     <Typography variant="h4">Olá equipe</Typography> :
                     <Box>
                         <Typography variant="h4">Não existem equipes criadas</Typography>
@@ -77,7 +88,7 @@ const MyTeams = () => {
                         Criar nova equipe
                     </DialogTitle>
                     <DialogContent>
-                        <TextField id="standard-basic" fullWidth label="Nome da equipe" variant="standard" value={nameTeam} onChange={(e)=>setNameTeam(e.target.value)} />
+                        <TextField id="standard-basic" fullWidth label="Nome da equipe" variant="standard" value={nameTeam} onChange={(e) => setNameTeam(e.target.value)} />
                     </DialogContent>
                     <DialogActions>
                         <Button autoFocus onClick={handleClose}>

@@ -4,6 +4,7 @@ import MenuBar from './components/MenuBar';
 import SideMenu from "./components/SideMenu";
 import { PokeDataProvider } from './hooks/pokeDataContext';
 import { SearchProvider } from './hooks/searchContext';
+import { MyTeamProvider } from './hooks/myTeamContext';
 import { BrowserRouter } from "react-router-dom"
 
 import Box from '@mui/material/Box';
@@ -15,11 +16,13 @@ const App = () => {
             <BrowserRouter>
                 <PokeDataProvider>
                     <SearchProvider>
-                        <MenuBar setOpenSideMenu={setOpenSideMenu} />
-                        <Box sx={{ display: "flex", minHeight: "100vh", }}>
-                            <SideMenu openSideMenu={openSideMenu} setOpenSideMenu={setOpenSideMenu} />
-                            <AllRoutes />
-                        </Box>
+                        <MyTeamProvider>
+                            <MenuBar setOpenSideMenu={setOpenSideMenu} />
+                            <Box sx={{ display: "flex", minHeight: "100vh", }}>
+                                <SideMenu openSideMenu={openSideMenu} setOpenSideMenu={setOpenSideMenu} />
+                                <AllRoutes />
+                            </Box>
+                        </MyTeamProvider>
                     </SearchProvider>
                 </PokeDataProvider>
             </BrowserRouter>
