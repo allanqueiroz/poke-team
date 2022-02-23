@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom"
+import { useMyTeam } from "../hooks/myTeamContext";
 
 import { CardActionArea, Card, CardMedia, Divider, Typography, Button } from '@mui/material';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 
 const PokeCard = ({ pokeAPIData }) => {
+    const { buttonClick } = useMyTeam();
     const myStylesPokeCard = {
         card: {
             width: {
@@ -30,10 +32,16 @@ const PokeCard = ({ pokeAPIData }) => {
         <React.Fragment>
             {
                 pokeAPIData.results ? pokeAPIData.results.map(pokemon => (
-                    <Card sx={myStylesPokeCard.card} key={pokemon.name} component={Link} to={`/detailed/${getIDfromURL(pokemon.url)}`}>
-                        <Button onClick={() => console.log("Clicou")} title="Adicionar pokemon à equipe">
-                            <AddBoxIcon />
-                        </Button>
+                    <Card key={pokemon.name} 
+                    sx={myStylesPokeCard.card} 
+                    component={buttonClick ? null : Link} 
+                    to={buttonClick ? null : `/detailed/${getIDfromURL(pokemon.url)}`}
+                    >
+                        {buttonClick ?
+                            <Button onClick={() => console.log("Clicou")} title="Adicionar pokemon à equipe">
+                                <AddBoxIcon />
+                            </Button> : null
+                        }
                         <CardActionArea title={pokemon.name}>
                             <CardMedia
                                 component="img"
