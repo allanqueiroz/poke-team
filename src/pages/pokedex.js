@@ -56,6 +56,7 @@ const Pokedex = () => {
                     </Box>
             }
             <Pagination page={page} onChange={handleItemPagination} count={45} shape="rounded" sx={myStylesPokedex.pagination} />
+           
         </Container>
     )
 }

@@ -60,13 +60,12 @@ const MyTeams = () => {
             }
             setAllTeams(value => [...value, dataTeam])
             setCurrentTeam(dataTeam);
-            setNameTeam("")
-            localStorage.setItem(MY_TEAM, JSON.stringify([...allTeams, dataTeam]))
+            setNameTeam("");
+            localStorage.setItem(MY_TEAM, JSON.stringify([...allTeams, dataTeam]));
             setOpen(false);
         }
     }
     const handleClickRemoveTeam = (id) => {
-        console.log(id)
         const newArrayOfTeams = allTeams.filter(item => {if(item.id != id) return item});
         localStorage.setItem(MY_TEAM, JSON.stringify(newArrayOfTeams));
         setAllTeams(newArrayOfTeams);
@@ -129,5 +128,4 @@ const MyTeams = () => {
         </React.Fragment>
     )
 }
-
 export default MyTeams;

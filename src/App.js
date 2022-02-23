@@ -2,6 +2,7 @@ import React from 'react';
 import AllRoutes from "./routes";
 import MenuBar from './components/MenuBar';
 import SideMenu from "./components/SideMenu";
+import BasicSpeedDial from './components/BasicSpeedDial';
 import { PokeDataProvider } from './hooks/pokeDataContext';
 import { SearchProvider } from './hooks/searchContext';
 import { MyTeamProvider } from './hooks/myTeamContext';
@@ -21,6 +22,7 @@ const App = () => {
                             <Box sx={{ display: "flex", minHeight: "100vh", }}>
                                 <SideMenu openSideMenu={openSideMenu} setOpenSideMenu={setOpenSideMenu} />
                                 <AllRoutes />
+                                <BasicSpeedDial/>
                             </Box>
                         </MyTeamProvider>
                     </SearchProvider>
