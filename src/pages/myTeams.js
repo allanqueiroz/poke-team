@@ -1,4 +1,5 @@
 import React from "react";
+import uniqid from 'uniqid';
 import { useMyTeam } from "../hooks/myTeamContext";
 
 import { Box, Button, TextField, Typography } from "@mui/material";
@@ -6,7 +7,7 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
+// import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Paper from '@mui/material/Paper';
 import Draggable from 'react-draggable';
@@ -24,7 +25,7 @@ function PaperComponent(props) {
 
 const MyTeams = () => {
     const MY_TEAM = "myteams";
-    const { allTeams, setAllTeams } = useMyTeam();
+    const { allTeams, setAllTeams, currentTeam, setCurrentTeam } = useMyTeam();
     const [nameTeam, setNameTeam] = React.useState("");
     const [open, setOpen] = React.useState(false);
     const myStyleMyTeam = {
@@ -32,7 +33,8 @@ const MyTeams = () => {
             m: 3,
         },
         button: {
-            width: "100%"
+            width: "100%",
+            height: 40
         },
         dialog: {
             display: "block",
@@ -46,15 +48,25 @@ const MyTeams = () => {
             }
         }
     }
+
+    React.useEffect(()=>{
+        console.log("useEffect:",allTeams)
+        // JSON.parse(localStorage.getItem(MY_TEAM))
+    },[allTeams])
+
     const handleClickOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
     const handleClickCreateTeam = () => {
         if (!nameTeam) alert("Nome da equipe não pode ser vazio")
         else {
             const dataTeam = {
+                id: uniqid(),
                 name: nameTeam,
-                teams: []
+                team: []
             }
+            setAllTeams(value => [...value, dataTeam])
+            setCurrentTeam(dataTeam);
+            setNameTeam("")
             localStorage.setItem(MY_TEAM, JSON.stringify([...allTeams, dataTeam]))
             setOpen(false);
         }
@@ -63,8 +75,8 @@ const MyTeams = () => {
     return (
         <React.Fragment>
             <Typography variant="h2" sx={myStyleMyTeam.typog}>Minhas Equipes</Typography>
-            <Button onClick={handleClickOpen} variant="contained" sx={[myStyleMyTeam.button, myStyleMyTeam.yellowColor]}>A
-                dicionar Nova equipe
+            <Button onClick={handleClickOpen} variant="contained" sx={[myStyleMyTeam.button, myStyleMyTeam.yellowColor]}>
+                Adicionar Nova equipe
             </Button>
             {
                 allTeams.length ?

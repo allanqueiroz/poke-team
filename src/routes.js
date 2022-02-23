@@ -3,6 +3,7 @@ import Pokedex from "./pages/pokedex";
 import MyTeams from "./pages/myTeams";
 import Berries from "./pages/berries";
 import Detailed from "./pages/detailed";
+import Information from "./pages/information";
 import { Route, Routes } from "react-router-dom"
 
 import Container from '@mui/material/Container';
@@ -15,6 +16,7 @@ const AllRoutes = () => {
                     <Route path="/teams" element={<MyTeams />} />
                     <Route path="/berries" element={<Berries/>} />
                     <Route path="/detailed/:id" element={<Detailed/>}/>
+                    <Route path="/info" element={<Information/>} />
                 </Routes>
             </Container>
     )

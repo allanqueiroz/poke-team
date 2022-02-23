@@ -5,4 +5,4 @@ const Information = () => {
         <h1>Information Page</h1>
     )
 }
-return Information;
+export default Information;
