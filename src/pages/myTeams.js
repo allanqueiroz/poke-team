@@ -2,15 +2,9 @@ import React from "react";
 import uniqid from 'uniqid';
 import { useMyTeam } from "../hooks/myTeamContext";
 
-import { Box, Button, TextField, Typography } from "@mui/material";
-
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-// import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Paper from '@mui/material/Paper';
+import { Box, Button, TextField, Typography, Dialog, DialogActions, DialogContent, DialogTitle, Paper } from "@mui/material";
 import Draggable from 'react-draggable';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 function PaperComponent(props) {
     return (
@@ -49,10 +43,10 @@ const MyTeams = () => {
         }
     }
 
-    React.useEffect(()=>{
-        console.log("useEffect:",allTeams)
-        // JSON.parse(localStorage.getItem(MY_TEAM))
-    },[allTeams])
+    React.useEffect(() => {
+        const localstor = JSON.parse(localStorage.getItem(MY_TEAM))
+        if (localstor) setAllTeams(localstor)
+    }, [])
 
     const handleClickOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
@@ -71,6 +65,12 @@ const MyTeams = () => {
             setOpen(false);
         }
     }
+    const handleClickRemoveTeam = (id) => {
+        console.log(id)
+        const newArrayOfTeams = allTeams.filter(item => {if(item.id != id) return item});
+        localStorage.setItem(MY_TEAM, JSON.stringify(newArrayOfTeams));
+        setAllTeams(newArrayOfTeams);
+    }
 
     return (
         <React.Fragment>
@@ -80,7 +80,24 @@ const MyTeams = () => {
             </Button>
             {
                 allTeams.length ?
-                    <Typography variant="h4">Olá equipe</Typography> :
+                    <React.Fragment>
+                        {
+                            allTeams.map(team => {
+                                return(
+                                    <Box key={team.id}>
+                                        <Typography variant="h5">{team.name}</Typography>
+                                        <Box>
+                                        <Typography variant="h1">[-]</Typography>
+                                        </Box>
+                                        <Button title="Remover Equipe" onClick={()=>handleClickRemoveTeam(team.id)}>
+                                            <DeleteForeverIcon/>
+                                        </Button>
+                                    </Box>
+                                )
+                            })
+                        }
+                    </React.Fragment>
+                    :
                     <Box>
                         <Typography variant="h4">Não existem equipes criadas</Typography>
                     </Box>

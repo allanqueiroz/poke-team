@@ -3,7 +3,7 @@ import React from "react";
 const MyTeamContext = React.createContext({});
 export function MyTeamProvider(props) {
     const [currentTeam, setCurrentTeam] = React.useState({});
-    const [allTeams, setAllTeams] = React.useState([{id:"aaa", name:"ablublube", team:[]}]);
+    const [allTeams, setAllTeams] = React.useState([]);
 
     return (
         <MyTeamContext.Provider value={{ currentTeam, setCurrentTeam, allTeams, setAllTeams }}>
