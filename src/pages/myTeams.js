@@ -58,7 +58,6 @@ const MyTeams = () => {
             localStorage.setItem(MY_TEAM, JSON.stringify([...allTeams, dataTeam]))
             setOpen(false);
         }
-
     }
 
     return (
