@@ -6,7 +6,7 @@ import { CardActionArea, Card, CardMedia, Divider, Typography, Button } from '@m
 import AddBoxIcon from '@mui/icons-material/AddBox';
 
 const PokeCard = ({ pokeAPIData }) => {
-    const { buttonClick } = useMyTeam();
+    const { buttonClick, currentTeam, setCurrentTeam } = useMyTeam();
     const myStylesPokeCard = {
         card: {
             width: {
@@ -26,7 +26,20 @@ const PokeCard = ({ pokeAPIData }) => {
             m: 1
         }
     }
+
     function getIDfromURL(url) { return url.slice(33).replace(/\//g, ""); }
+    const handleClickAddToTeam = (name, urlImage) =>{
+        console.log(currentTeam);
+        if(currentTeam.team.lenght <= 6){
+            setCurrentTeam(value =>{
+                const a = {...value};
+                a.team.push({name, urlImage})
+                return a;
+            })
+        }else{
+            alert("Equipe nao pode ter mais que 6 pokemons")
+        }
+    }
 
     return (
         <React.Fragment>
@@ -38,7 +51,7 @@ const PokeCard = ({ pokeAPIData }) => {
                     to={buttonClick ? null : `/detailed/${getIDfromURL(pokemon.url)}`}
                     >
                         {buttonClick ?
-                            <Button onClick={() => console.log("Clicou")} title="Adicionar pokemon à equipe">
+                            <Button onClick={() => handleClickAddToTeam(pokemon.name, `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getIDfromURL(pokemon.url)}.png`)} title="Adicionar pokemon à equipe">
                                 <AddBoxIcon />
                             </Button> : null
                         }
