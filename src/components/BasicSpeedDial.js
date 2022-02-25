@@ -6,10 +6,16 @@ import SaveIcon from '@mui/icons-material/Save';
 import BackspaceIcon from '@mui/icons-material/Backspace';
 
 const BasicSpeedDial = () => {
-  const { setButtonClick } = useMyTeam();
+  const { setButtonClick, setCurrentTeam } = useMyTeam();
   const actions = [
     { icon: <SpeedDialIcon />, name: 'Enable Add to team', click:function(){setButtonClick(oldV => !oldV)} },
-    { icon: <BackspaceIcon />, name: 'Clear Team', click:function(){console.log("limpou a equipe")} },
+    { icon: <BackspaceIcon />, name: 'Clear Team', click:function(){
+      setCurrentTeam(value =>{
+        const a = {...value};
+        a.team = [];
+        return a;
+    })
+    } },
     { icon: <SaveIcon />, name: 'Save', click: function(){console.log("salvou a equipe")} },
   ];
   const myStyleBasicSpeedDial = {
@@ -27,7 +33,7 @@ const BasicSpeedDial = () => {
   return (
     <Box sx={myStyleBasicSpeedDial.box}>
       <SpeedDial
-        title="Clique aqui para liberar a opção de adicionar pokemons a sua equipe atual"
+        title="Opções de equipe"
         ariaLabel="speed-dial"
         icon={<SpeedDialIcon />}
         direction="down"
@@ -38,6 +44,7 @@ const BasicSpeedDial = () => {
               icon={action.icon}
               tooltipTitle={action.name}
               onClick={action.click}
+              tooltipOpen={true}
             />
           ))}
       </SpeedDial>
