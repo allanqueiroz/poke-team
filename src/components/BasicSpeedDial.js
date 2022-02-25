@@ -1,12 +1,17 @@
 import React from "react";
 import { useMyTeam } from "../hooks/myTeamContext";
 
-import SpeedDial from '@mui/material/SpeedDial';
-import SpeedDialIcon from '@mui/material/SpeedDialIcon';
-import { Box } from "@mui/material";
+import { Box, SpeedDialAction, SpeedDialIcon, SpeedDial } from "@mui/material";
+import SaveIcon from '@mui/icons-material/Save';
+import BackspaceIcon from '@mui/icons-material/Backspace';
 
 const BasicSpeedDial = () => {
   const { setButtonClick } = useMyTeam();
+  const actions = [
+    { icon: <SpeedDialIcon />, name: 'Enable Add to team', click:function(){setButtonClick(oldV => !oldV)} },
+    { icon: <BackspaceIcon />, name: 'Clear Team', click:function(){console.log("limpou a equipe")} },
+    { icon: <SaveIcon />, name: 'Save', click: function(){console.log("salvou a equipe")} },
+  ];
   const myStyleBasicSpeedDial = {
     box: {
       height: 320,
@@ -14,16 +19,28 @@ const BasicSpeedDial = () => {
       flexGrow: 1,
       position: 'sticky',
       top: 0,
+      marginTop: 3,
+      marginRight: 3
     }
   }
+
   return (
     <Box sx={myStyleBasicSpeedDial.box}>
       <SpeedDial
         title="Clique aqui para liberar a opção de adicionar pokemons a sua equipe atual"
         ariaLabel="speed-dial"
         icon={<SpeedDialIcon />}
-        onClick={() => setButtonClick(oldV => !oldV)}
-      />
+        direction="down"
+      >
+        {actions.map((action) => (
+            <SpeedDialAction
+              key={action.name}
+              icon={action.icon}
+              tooltipTitle={action.name}
+              onClick={action.click}
+            />
+          ))}
+      </SpeedDial>
     </Box>
   );
 }

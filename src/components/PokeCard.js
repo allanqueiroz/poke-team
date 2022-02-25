@@ -24,20 +24,27 @@ const PokeCard = ({ pokeAPIData }) => {
         },
         divider: {
             m: 1
+        },
+        buttonAdd: {
+            backgroundColor:"#f1f1f1"
         }
     }
 
     function getIDfromURL(url) { return url.slice(33).replace(/\//g, ""); }
     const handleClickAddToTeam = (name, urlImage) =>{
         console.log(currentTeam);
-        if(currentTeam.team.lenght <= 6){
-            setCurrentTeam(value =>{
-                const a = {...value};
-                a.team.push({name, urlImage})
-                return a;
-            })
+        if(currentTeam.team == undefined){
+            alert("Por favor, adicione uma equipe")
         }else{
-            alert("Equipe nao pode ter mais que 6 pokemons")
+            if(currentTeam.team.length <= 5){
+                setCurrentTeam(value =>{
+                    const a = {...value};
+                    a.team.push({name, urlImage})
+                    return a;
+                })
+            }else{
+                alert("A equipe atual não pode ter mais que 6 pokemons")
+            }
         }
     }
 
@@ -51,7 +58,8 @@ const PokeCard = ({ pokeAPIData }) => {
                     to={buttonClick ? null : `/detailed/${getIDfromURL(pokemon.url)}`}
                     >
                         {buttonClick ?
-                            <Button onClick={() => handleClickAddToTeam(pokemon.name, `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getIDfromURL(pokemon.url)}.png`)} title="Adicionar pokemon à equipe">
+                            <Button onClick={() => handleClickAddToTeam(pokemon.name, `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getIDfromURL(pokemon.url)}.png`)} title="Adicionar pokemon à equipe" fullWidth={true} sx={myStylesPokeCard.buttonAdd}
+                            >
                                 <AddBoxIcon />
                             </Button> : null
                         }
